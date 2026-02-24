@@ -1,0 +1,46 @@
+pipeline:
+  name: ci-cd push
+  identifier: cicd_push
+  projectIdentifier: Harness_CICD
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: git_connector
+        build: <+input>
+  stages:
+    - stage:
+        name: CI-Build
+        identifier: CIBuild
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: true
+          buildIntelligence:
+            enabled: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: EKS
+              namespace: default
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushECR
+                  name: BuildAndPushECR_1
+                  identifier: BuildAndPushECR_1
+                  spec:
+                    connectorRef: awsmain
+                    region: ap-south-1
+                    account: "035466343264"
+                    imageName: my-harness-image
+                    tags:
+                      - <+pipeline.sequenceId>
+                    caching: true
