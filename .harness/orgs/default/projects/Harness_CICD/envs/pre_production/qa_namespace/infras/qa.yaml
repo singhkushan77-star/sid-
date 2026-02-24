@@ -1,0 +1,13 @@
+infrastructureDefinition:
+  name: qa
+  identifier: qa
+  orgIdentifier: default
+  projectIdentifier: Harness_CICD
+  environmentRef: qa_namespace
+  deploymentType: Kubernetes
+  type: KubernetesDirect
+  spec:
+    connectorRef: EKS
+    namespace: qa-namespace
+    releaseName: release-<+INFRA_KEY_SHORT_ID>
+  allowSimultaneousDeployments: false
