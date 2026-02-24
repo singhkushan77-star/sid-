@@ -1,4 +1,6 @@
-# Assuming the rest of the Dockerfile is preserved and only the RUN command is replaced
-
-# Previous instructions
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
 RUN npm install --only-production
+COPY . .
+CMD ["node", "index.js"]
