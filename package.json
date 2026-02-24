@@ -1,0 +1,14 @@
+{
+  "name": "sid",
+  "version": "1.0.0",
+  "description": "Simple Node.js app for CI/CD test",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Kushan Singh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
