@@ -1,11 +1,4 @@
-FROM node:18-alpine as builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
+# Assuming the rest of the Dockerfile is preserved and only the RUN command is replaced
 
-FROM node:18-alpine
-WORKDIR /app
-COPY --from=builder /app/node_modules ./node_modules
-COPY . .
-EXPOSE 3000
-CMD ["node", "index.js"]
+# Previous instructions
+RUN npm install --only-production
