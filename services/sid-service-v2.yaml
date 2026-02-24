@@ -1,0 +1,38 @@
+service:
+  name: sid-service
+  identifier: sidservice
+  serviceDefinition:
+    type: Kubernetes
+    spec:
+      manifests:
+        - manifest:
+            identifier: k8smanifest
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: git_connector
+                  gitFetchType: Branch
+                  paths:
+                    - deployment.yaml
+                    - service.yaml
+                  branch: main
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
+              optionalValuesYaml: false
+      artifacts:
+        primary:
+          primaryArtifactRef: myAppArtifact
+          sources:
+            - spec:
+                connectorRef: awsmain
+                imagePath: my-harness-repo
+                tag: <+input>
+                digest: ""
+                region: ap-south-1
+              identifier: myAppArtifact
+              type: Ecr
+  gitOpsEnabled: false
+  orgIdentifier: default
+  projectIdentifier: Harness_CICD
