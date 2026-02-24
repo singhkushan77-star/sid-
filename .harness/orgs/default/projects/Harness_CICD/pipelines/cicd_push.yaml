@@ -40,7 +40,7 @@ pipeline:
                     connectorRef: awsmain
                     region: ap-south-1
                     account: "035466343264"
-                    imageName: my-harness-image
+                    imageName: my-harness-repo
                     tags:
                       - <+pipeline.sequenceId>
                     caching: true
