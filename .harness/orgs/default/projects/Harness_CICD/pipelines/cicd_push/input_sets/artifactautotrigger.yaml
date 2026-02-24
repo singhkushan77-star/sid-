@@ -1,0 +1,28 @@
+inputSet:
+  name: artifact-auto-trigger
+  identifier: artifactautotrigger
+  orgIdentifier: default
+  projectIdentifier: Harness_CICD
+  pipeline:
+    identifier: cicd_push
+    properties:
+      ci:
+        codebase:
+          build: <+input>
+    stages:
+      - stage:
+          identifier: CD_push
+          type: Deployment
+          spec:
+            service:
+              serviceInputs:
+                serviceDefinition:
+                  type: Kubernetes
+                  spec:
+                    artifacts:
+                      primary:
+                        sources:
+                          - identifier: myAppArtifact
+                            type: Ecr
+                            spec:
+                              tag: "9"
